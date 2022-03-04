@@ -5,13 +5,27 @@
   </body>
   <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-  <script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
     const root = document.getElementById("root");
-    const span = React.createElement(
-      "span",
-      { id: "sexy-span", style: { color: "red" } },
-      "Hello, I'm span"
+    let counter = 0;
+
+    function countUp() {
+      counter = counter + 1;
+      render();
+    }
+
+    function render() {
+      ReactDOM.render(<Container />, root);
+    }
+
+    const Container = () => (
+      <div>
+        <h3>Total clicks: {counter}</h3>
+        <button onClick={countUp}>Click me</button>
+      </div>
     );
-    ReactDOM.render(span, root);
+    render();
   </script>
 </html>
