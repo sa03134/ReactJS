@@ -5,11 +5,9 @@
     <button id="btn">+</button>
   </body>
   <script>
+    let counter = 0;
     const button = document.querySelector("#btn");
     const span = document.querySelector("span");
-
-    let counter = 0;
-
     function handleClick() {
       counter++;
       span.innerText = `Total clicks: ${counter}`;
