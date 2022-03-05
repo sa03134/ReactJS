@@ -8,22 +8,51 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <script type="text/babel">
-    const root = document.getElementById("root");
-
     function App() {
-      const [counter, setCounter] = React.useState(0);
-      const onClick = () => {
-        // setCounter(counter + 1);
-        setCounter((current) => current + 1);
+      const [amount, setAmount] = React.useState();
+      const [inverted, setInverted] = React.useState(false);
+      const onChange = (event) => {
+        setAmount(event.target.value);
       };
 
+      const reset = () => setAmount("");
+      const onInverted = () => {
+        reset();
+        setInverted((current) => !current);
+      };
       return (
         <div>
-          <h3>Total clicks: {counter}</h3>
-          <button onClick={onClick}>Click me</button>
+          <h1 className="hi">Super Converter</h1>
+
+          <div>
+            <label htmlFor="minutes">Minutes</label>
+            <input
+              value={inverted ? amount * 60 : amount}
+              id="minutes"
+              type="number"
+              placeholder="Minutes"
+              onChange={onChange}
+              disabled={inverted === true}
+            />
+          </div>
+          <div>
+            <label htmlFor="hours">Hours</label>
+            <input
+              value={inverted ? amount : Math.round(amount / 60)}
+              id="hours"
+              placeholder="hours"
+              disabled={inverted === false}
+              onChange={onChange}
+            />
+          </div>
+          <button onClick={reset}>Reset</button>
+          <button onClick={onInverted}>
+            {inverted ? "Turn back" : "Invert"}
+          </button>
         </div>
       );
     }
+    const root = document.getElementById("root");
     ReactDOM.render(<App />, root);
   </script>
 </html>
